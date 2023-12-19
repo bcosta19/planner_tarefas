@@ -13,7 +13,7 @@ class TaskBoard {
   void setQtdTask(int userId) async{
     TaskController tc = TaskController();
     this.qtdTask = await tc.getAllTaskOfTaskBoards(userId, id!);
-    print(qtdTask);
+    
   }
 
 

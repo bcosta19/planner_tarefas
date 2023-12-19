@@ -11,7 +11,7 @@ class Task {
   late final DateTime date;
   late final DateTime startTime;
   late final DateTime endTime;
-  final Bool isCompleted;
+  final bool isCompleted;
 
   Task(
       {this.id,
@@ -45,7 +45,7 @@ class Task {
       date: map["date"] as DateTime,
       startTime: map["startTime"] as DateTime,
       endTime: map["endTime"] as DateTime,
-      isCompleted: map["isCompleted"] as Bool
+      isCompleted: map["isCompleted"] as bool
     );
   }
 

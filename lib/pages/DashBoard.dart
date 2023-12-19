@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:planner_tarefas/controller/TaskController.dart';
 

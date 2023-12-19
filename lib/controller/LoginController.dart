@@ -29,7 +29,7 @@ class LoginController {
       return User.fromMap(res.first);
     }
     
-    return User(id: -1, username: "", password: "");
+    return User(id: -1, username: "", email: "", password: "");
   }
 
   Future<List<User>> getAllUser() async {

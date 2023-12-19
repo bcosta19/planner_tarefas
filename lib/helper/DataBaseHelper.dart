@@ -2,10 +2,9 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-
   static final DatabaseHelper _instance = DatabaseHelper.internal();
   static Database? _db;
-  
+
   factory DatabaseHelper() => _instance;
 
   DatabaseHelper.internal();
@@ -18,23 +17,26 @@ class DatabaseHelper {
     final databasePath = await getDatabasesPath();
 
     final path = join(databasePath, "data.db");
-    
-    Database db = await openDatabase(
-      path,
-      version: 1,
-      onCreate: (db, version) async {
 
-        String sql = """
+    Database db =
+        await openDatabase(path, version: 1, onCreate: (db, version) async {
+      String sql = """
             CREATE TABLE user( 
               id INTEGER PRIMARY KEY AUTOINCREMENT, 
               username VARCHAR,
               email varchar, 
               password VARCHAR
-            );""";
-         await db.execute(sql);
+            );
+            
+            CREATE TABLE task_board(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name VARCHAR NOT NULL,
+	          color INTEGER NOT NULL
+            );
 
-      }
-    );
+            """;
+      await db.execute(sql);
+    });
 
     return db;
   }

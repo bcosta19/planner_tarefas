@@ -12,15 +12,16 @@ void main(){
   sqfliteFfiInit();
   databaseFactory = databaseFactoryFfi;
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     title: "Planner",
     initialRoute: '/login',
     routes: {
-      '/login': (context) => Login(),
-      '/dashboard': (context) => DashBoard(),
-      '/task': (context) => Tasks(),
-      '/search': (context) => Search(),
-      '/recentsTasks': (context) => RecentsTasks(),
-      '/completeTasks': (context) => CompleteTasks(),
+      '/login': (context) => const Login(),
+      '/dashboard': (context) => DashBoard(0),
+      '/task': (context) => const Tasks(),
+      '/search': (context) => const Search(),
+      '/recentsTasks': (context) => const RecentsTasks(),
+      '/completeTasks': (context) => const CompleteTasks(),
     }
 
   ));

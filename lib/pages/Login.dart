@@ -22,6 +22,7 @@ enum LoginStatus {notSignIn, signIn}
 class _LoginState extends State<Login>{
   LoginStatus _loginStatus = LoginStatus.notSignIn;
   String? _username, _password;
+  int? user_id;
   
   final _formKey = GlobalKey<FormState>();
   late LoginController controller;
@@ -59,8 +60,10 @@ class _LoginState extends State<Login>{
       form.save();
       try{
         User user = await controller.getLogin(_username!, _password!);
+        
         if (user.id != -1){
           savePref(1, user.username, user.password);
+          user_id = user.id!;
           _loginStatus = LoginStatus.signIn;
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
@@ -143,7 +146,7 @@ class _LoginState extends State<Login>{
             ),
           );
         case LoginStatus.signIn:
-          return DashBoard();
+          return DashBoard(user_id!);
     }
     
   }

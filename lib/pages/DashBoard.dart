@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:planner_tarefas/controller/TaskController.dart';
-import 'package:planner_tarefas/controller/LoginController.dart';
+
 import 'package:planner_tarefas/model/TaskBoard.dart';
 import 'package:planner_tarefas/controller/TaskBoardController.dart';
 
@@ -19,9 +21,11 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoard extends State<DashBoard>{
   final TaskBoardController _taskBoardController = TaskBoardController();
+  late TaskController _taskController;
   late int usuarioId; 
   _DashBoard(int id){
     this.usuarioId = id;
+    _taskController = TaskController();
   }
   
   
@@ -71,12 +75,15 @@ class _DashBoard extends State<DashBoard>{
             return Text('Erro ao carregar quadros de tarefas\n' + snapshot.error.toString());
           } else {
             List<TaskBoard> taskBoards = snapshot.data ?? [];
+            
+            
+        
             return ListView.builder(
               itemCount: taskBoards.length,
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(taskBoards[index].name),
-                  //subtitle: Text('Quantidade de Tarefas: ${taskBoards[index].taskCount}'),
+                  subtitle: Text('Quantidade de Tarefas:${taskBoards[index].qtdTask}'),
                   onTap: () {
                     // Implemente a lógica para navegar para a tela de tarefas do quadro selecionado
                   },

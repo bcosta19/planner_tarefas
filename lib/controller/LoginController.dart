@@ -25,7 +25,7 @@ class LoginController {
    
     var res = await db.rawQuery(sql);
    
-    if (res.length > 0) {
+    if (res.isNotEmpty) {
       return User.fromMap(res.first);
     }
     

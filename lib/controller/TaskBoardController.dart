@@ -1,5 +1,6 @@
 import 'package:planner_tarefas/helper/DataBaseHelper.dart';
 import 'package:planner_tarefas/model/TaskBoard.dart';
+import 'TaskController.dart';
 
 class TaskBoardController{
 

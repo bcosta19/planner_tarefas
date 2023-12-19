@@ -1,11 +1,22 @@
 import 'dart:convert';
+import 'package:planner_tarefas/controller/TaskController.dart';
+
 
 class TaskBoard {
   final int? id;
   final String name;
   final int color;
+  late int qtdTask = -1;
 
   TaskBoard({this.id, required this.name, required this.color});
+  
+  void setQtdTask(int userId) async{
+    TaskController tc = TaskController();
+    this.qtdTask = await tc.getAllTaskOfTaskBoards(userId, id!);
+    print(qtdTask);
+  }
+
+
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

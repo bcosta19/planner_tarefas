@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class Login extends StatefulWidget{
 
   const Login({super.key});
-  String get routeName => "/login";
+  static const String routeName = "/login";
 
   String getRouteName(){
-    return this.routeName;
+    return routeName;
   }
 
   @override

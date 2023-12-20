@@ -10,11 +10,7 @@ class TaskBoard {
 
   TaskBoard({this.id, required this.name, required this.color});
   
-  void setQtdTask(int userId) async{
-    TaskController tc = TaskController();
-    this.qtdTask = await tc.getAllTaskOfTaskBoards(userId, id!);
-    
-  }
+
 
 
 

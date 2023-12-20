@@ -3,6 +3,8 @@ import 'package:planner_tarefas/controller/TaskController.dart';
 
 import 'package:planner_tarefas/model/TaskBoard.dart';
 import 'package:planner_tarefas/controller/TaskBoardController.dart';
+import 'package:planner_tarefas/pages/Login.dart';
+import 'package:planner_tarefas/pages/Tasks.dart';
 
 class DashBoard extends StatefulWidget {
  
@@ -41,7 +43,11 @@ class _DashBoard extends State<DashBoard>{
             onSelected: (value) {
               // Aqui você pode adicionar lógica para cada opção do menu
               if (value == 'Deslogar') {
-
+                Navigator.pushAndRemoveUntil(
+                  context, 
+                  MaterialPageRoute(builder: (context) => Login()),
+                  (route) => false
+                  );
                 // Implemente a lógica de deslogar aqui
               } else if (value == 'Pesquisar') {
                 // Implemente a lógica de pesquisa aqui
@@ -83,7 +89,9 @@ class _DashBoard extends State<DashBoard>{
                   title: Text(taskBoards[index].name),
                   subtitle: Text('Quantidade de Tarefas:${taskBoards[index].qtdTask}'),
                   onTap: () {
-                    // Implemente a lógica para navegar para a tela de tarefas do quadro selecionado
+                    Navigator.push(context, 
+                    MaterialPageRoute(builder: (context) => Tasks(usuarioId, taskBoards[index].id))
+                    );
                   },
                 );
               },

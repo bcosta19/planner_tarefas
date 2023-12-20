@@ -33,11 +33,14 @@ class TaskController{
     return list;
   }
 
-  Future<int> getAllTaskOfTaskBoards(int user_id, int board_id) async{
+  Future<List<Task>> getAllTaskOfTaskBoards(int user_id, int board_id) async{
     var db = await con.db;
     String sql = """SELECT * FROM task WHERE user_id = ${user_id} AND board_id = ${board_id}""";
     var res = await db.rawQuery(sql);
-    return res.length;
+    print(res.isNotEmpty);
+    List<Task> list = res.isNotEmpty? res.map((c) {print(c); return Task.fromMap(c);}).toList() : [];
+    print(list);
+    return list;
 
   }
 

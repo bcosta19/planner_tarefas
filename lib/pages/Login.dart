@@ -26,7 +26,7 @@ class _LoginState extends State<Login>{
   
   final _formKey = GlobalKey<FormState>();
   late LoginController controller;
-  var value;
+  var value = 0;
 
 
   _LoginState(){
@@ -46,9 +46,9 @@ class _LoginState extends State<Login>{
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
     setState(() {
-      value = preferences.getInt("value");
+      value = preferences.getInt("value")!;
       print(value);
-      _loginStatus = (value == 1) ? LoginStatus.signIn : LoginStatus.notSignIn;
+      _loginStatus = (value == 0) ? LoginStatus.signIn : LoginStatus.notSignIn;
     });
   }
 

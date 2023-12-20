@@ -26,7 +26,7 @@ class _LoginState extends State<Login>{
   
   final _formKey = GlobalKey<FormState>();
   late LoginController controller;
-  var value = 0;
+  int value = 0;
 
 
   _LoginState(){
@@ -48,7 +48,7 @@ class _LoginState extends State<Login>{
     setState(() {
       value = preferences.getInt("value")!;
       print(value);
-      _loginStatus = (value == 0) ? LoginStatus.signIn : LoginStatus.notSignIn;
+      _loginStatus = (value == 1) ? LoginStatus.signIn : LoginStatus.notSignIn;
     });
   }
 

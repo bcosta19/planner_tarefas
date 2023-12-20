@@ -153,6 +153,15 @@ void _showAddTaskDialog(BuildContext context) {
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      Checkbox(
+                        value: tasks[index].isCompleted == 1 ? true : false,
+                        onChanged: (value) async{
+                          await taskController.markTaskAsComplete(tasks[index]);
+                          setState(() {
+                            
+                          });
+                        },
+                        ),
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {

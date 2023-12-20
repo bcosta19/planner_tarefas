@@ -23,6 +23,19 @@ class TaskController{
 
     return Task.fromMap(res.first);
   }
+
+  Future<void> markTaskAsComplete(Task task) async{
+    var db = await con.db;
+    var novoValor = task.isCompleted == 1? 0 : 1;
+
+    
+    await db.update('task', 
+    {'isCompleted': novoValor},
+    where: 'id = ?',
+    whereArgs: [task.id]
+    );
+  }
+
   Future<void> updateTask(Task task, String newTitle, String newNote) async{
     var db = await con.db;
     await db.update(

@@ -15,6 +15,7 @@ class Task {
 
   Task(
       {this.id,
+      required this.user_id,
       required this.board_id,
       required this.title,
       required this.note,
@@ -26,8 +27,9 @@ class Task {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       "id": this.id,
+      "user_id": this.user_id,
       "board_id": this.board_id,
-      "title": this.board_id,
+      "title": this.title,
       "note": this.note,
       "date": this.date,
       "startTime": this.startTime,
@@ -39,6 +41,7 @@ class Task {
   factory Task.fromMap(Map<String, dynamic> map){
     return Task(
       id: map["id"] ??= map["id"] as int,
+      user_id: map["user_id"] as int,
       board_id: map["board_id"] as int,
       title: map["title"] as String,
       note: map["note"] as String,

@@ -17,17 +17,81 @@ class Tasks extends StatefulWidget {
 class _Tasks extends State<Tasks>{
   late int usuarioId, taskBoardId;
   final TaskController taskController = TaskController();
-
+ 
   _Tasks(id, tbId){
     usuarioId = id;
     taskBoardId = tbId;
   }
-  
+
+
+void _addNewTask(String title, String note) async{
+    // Adicione a lógica para criar a nova tarefa
+    Task newTask = Task(
+      user_id: usuarioId,
+      board_id: taskBoardId,
+      title: title,
+      note: note,
+      date: DateTime.now().toLocal().toString(),
+      startTime: '',
+      endTime: '',
+      isCompleted: 0,
+    );
+
+    await taskController.addTask(newTask);
+    setState(() {
+      
+    }); 
+   
+  }
+void _showAddTaskDialog(BuildContext context) {
+    TextEditingController titleController = TextEditingController();
+    TextEditingController noteController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Adicionar Nova Tarefa'),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Título:'),
+              TextField(controller: titleController),
+              SizedBox(height: 8),
+              Text('Nota:'),
+              TextField(controller: noteController),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                _addNewTask(titleController.text, noteController.text);
+                Navigator.pop(context); // Fechar o diálogo
+              },
+              child: Text('Adicionar'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Fechar o diálogo
+              },
+              child: Text('Cancelar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context){
     print("${usuarioId} ${taskBoardId}");
     return Scaffold(
-      appBar: AppBar(title: Text("Tarefas"),),
+      appBar: AppBar(
+        title: Text("Tarefas"),
+        actions: [
+          IconButton(onPressed: (){_showAddTaskDialog(context);}, icon: Icon(Icons.add))
+        ],
+        ),
       body: FutureBuilder<List<Task>>(
         future: taskController.getAllTaskOfTaskBoards(usuarioId, taskBoardId),
         builder: (context, snapshot){

@@ -4,7 +4,7 @@ import 'package:planner_tarefas/model/Task.dart';
 class TaskController{
   DatabaseHelper con = DatabaseHelper();
 
-  Future<int> saveTask(Task task) async{
+  Future<int> addTask(Task task) async{
     var db = await con.db;
     int res = await db.insert('task', task.toMap());
     return res;

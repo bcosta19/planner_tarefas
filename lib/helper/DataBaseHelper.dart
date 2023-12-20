@@ -46,6 +46,22 @@ class DatabaseHelper {
 	            FOREIGN KEY(user_id) REFERENCES user(id),
 	            FOREIGN KEY(board_id) REFERENCES task_board(id)
               );
+              INSERT INTO user(username, email, password) VALUES('teste1', 'teste1@teste', '123456');
+              INSERT INTO user(username, email, password) VALUES('teste2', 'teste2@teste', '123456');
+              INSERT INTO user(username, email, password) VALUES('teste3', 'teste3@teste', '123456');
+              INSERT INTO user(username, email, password) VALUES('teste4', 'teste4@teste', '123456');
+              INSERT INTO user(username, email, password) VALUES('teste5', 'teste5@teste', '123456');
+              INSERT INTO task_board(name, color) VALUES('Trabalho', 1);
+              INSERT INTO task_board(name, color) VALUES('Saúde', 2);
+              INSERT INTO task_board(name, color) VALUES('Estudo', 3);
+              INSERT INTO task_board(name, color) VALUES('Flutter', 4);
+              INSERT INTO task_board(name, color) VALUES('Academia', 5);
+              INSERT INTO task(user_id, board_id, title, note, date, startTime, endTime, isCompleted) VALUES(1, 1, 'Criar Projeto', 'Definir a estrutura do projeto indicando a linguagem de programação e dados necessários.', '2023-12-01', '2024-01-01', '2024-01-02', 0);
+              INSERT INTO task(user_id, board_id, title, note, date, startTime, endTime, isCompleted) VALUES(1, 2, 'Comprar Frutas', 'Comprar maça, banana e abacaxi.', '2023-12-01', '2024-01-01', '2024-01-02', 0);
+              INSERT INTO task(user_id, board_id, title, note, date, startTime, endTime, isCompleted) VALUES(2, 3, 'Estudar P2 de Sistemas Operacionais', 'Fazer resumo de Gerência de Memória focando em Paginação.', '2023-12-01', '2024-01-01', '2024-01-02', 0);
+              INSERT INTO task(user_id, board_id, title, note, date, startTime, endTime, isCompleted) VALUES(3, 4, 'Projeto Planner de Tarefas', 'Organizar tarefas com o grupo e definir a estrutura do projeto.', '2023-12-01', '2023-12-01', '2022-12-20', 0);
+              INSERT INTO task(user_id, board_id, title, note, date, startTime, endTime, isCompleted) VALUES(3, 5, 'Correr no Campus da UFF', 'Alcançar a meta de 5KM.', '2023-12-01', '2024-01-01', '2024-01-02', 0);
+
 
             
             """;

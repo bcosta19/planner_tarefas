@@ -47,8 +47,8 @@ class _LoginState extends State<Login>{
 
     setState(() {
       value = preferences.getInt("value");
-      
-      _loginStatus = (value == 1) ? LoginStatus.notSignIn : LoginStatus.signIn;
+      print(value);
+      _loginStatus = (value == 1) ? LoginStatus.signIn : LoginStatus.notSignIn;
     });
   }
 

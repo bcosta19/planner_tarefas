@@ -81,7 +81,47 @@ void _showAddTaskDialog(BuildContext context) {
       },
     );
   }
+  void _editTask(Task task) {
+    TextEditingController titleController = TextEditingController(text: task.title);
+    TextEditingController noteController = TextEditingController(text: task.note);
 
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Editar Tarefa'),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Novo Título:'),
+            TextField(controller: titleController),
+            SizedBox(height: 8),
+            Text('Nova Nota:'),
+            TextField(controller: noteController),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              taskController.updateTask(task, titleController.text, noteController.text);
+              Navigator.pop(context); // Fechar o diálogo
+              setState(() {
+                
+              });
+            },
+            child: Text('Salvar'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Fechar o diálogo
+            },
+            child: Text('Cancelar'),
+          ),
+        ],
+      );
+    },
+  );
+}
   @override
   Widget build(BuildContext context){
     print("${usuarioId} ${taskBoardId}");
@@ -110,6 +150,25 @@ void _showAddTaskDialog(BuildContext context) {
                 return ListTile(
                   title: Text(tasks[index].title),
                   subtitle: Text(tasks[index].note),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          _editTask(tasks[index]);
+                        }
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () async { 
+                          await taskController.deleteTask(tasks[index]);
+                          setState(() {
+                            tasks.remove(tasks[index]);
+                          });
+                          },)
+                    ],
+                  ),
                 );
               },
             );

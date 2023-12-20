@@ -12,7 +12,7 @@ class TaskController{
 
   Future<int> deleteTask(Task task) async{
     var db = await con.db;
-    int res = await db.delete("taks", where: "id = ?", whereArgs: [task.id]);
+    int res = await db.delete("task", where: "id = ?", whereArgs: [task.id]);
     return res;
   }
 
@@ -23,7 +23,17 @@ class TaskController{
 
     return Task.fromMap(res.first);
   }
-
+  Future<void> updateTask(Task task, String newTitle, String newNote) async{
+    var db = await con.db;
+    await db.update(
+        'task', 
+        {'title': newTitle, 
+        'note': newNote
+        },
+        where: 'id = ?',
+        whereArgs: [task.id]
+      );
+  }
   Future<List<Task>> getAllTasksOfUser(int id) async {
     var db = await con.db;
     String sql = """SELECT * FROM task WHERE user_id = ${id}""";

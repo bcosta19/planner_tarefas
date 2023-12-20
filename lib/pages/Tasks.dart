@@ -138,7 +138,7 @@ void _showAddTaskDialog(BuildContext context) {
           if(snapshot.connectionState == ConnectionState.waiting){
             return CircularProgressIndicator();
           }else if(snapshot.hasError){
-            return Text('Erro: ${snapshot.error}');
+            return Text('Erro: ${snapshot.error.toString()}');
           }else{
             List<Task> tasks = snapshot.data!;
             

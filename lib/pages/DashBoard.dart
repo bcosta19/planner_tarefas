@@ -3,6 +3,7 @@ import 'package:planner_tarefas/controller/TaskController.dart';
 
 import 'package:planner_tarefas/model/TaskBoard.dart';
 import 'package:planner_tarefas/controller/TaskBoardController.dart';
+import 'package:planner_tarefas/pages/CompleteTasks.dart';
 import 'package:planner_tarefas/pages/Login.dart';
 import 'package:planner_tarefas/pages/Tasks.dart';
 
@@ -54,7 +55,7 @@ class _DashBoard extends State<DashBoard>{
               } else if (value == 'Tarefas Recentes') {
                 // Implemente a lógica de tarefas recentes aqui
               } else if (value == 'Tarefas Concluídas') {
-                // Implemente a lógica de tarefas concluídas aqui
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CompleteTasks(usuarioId)));
               }
             },
             itemBuilder: (BuildContext context) {

@@ -35,7 +35,13 @@ class TaskController{
     whereArgs: [task.id]
     );
   }
-
+  Future<List<Task>> getCompleteTasks(int usuarioId)async{
+    var db = await con.db;
+    String sql = """SELECT * FROM task WHERE user_id = ${usuarioId} AND isCompleted = 1""";
+    var res = await db.rawQuery(sql);
+    List<Task> list = res.isNotEmpty ? res.map((c) => Task.fromMap(c)).toList() : [];
+    return list;
+  }
   Future<void> updateTask(Task task, String newTitle, String newNote) async{
     var db = await con.db;
     await db.update(

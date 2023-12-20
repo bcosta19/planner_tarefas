@@ -23,7 +23,7 @@ void main(){
       '/task': (context) => Tasks(0, 0),
       '/search': (context) => const Search(),
       '/recentsTasks': (context) => const RecentsTasks(),
-      '/completeTasks': (context) => const CompleteTasks(),
+      '/completeTasks': (context) => CompleteTasks(0),
     }
 
   ));

@@ -3,6 +3,7 @@ import 'package:planner_tarefas/controller/LoginController.dart';
 import '../model/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:planner_tarefas/pages/DashBoard.dart';
+import '../model/User.dart';
 
 class Login extends StatefulWidget{
 
@@ -48,7 +49,7 @@ class _LoginState extends State<Login>{
     setState(() {
       value = preferences.getInt("value")!;
       print(value);
-      _loginStatus = (value == 1) ? LoginStatus.signIn : LoginStatus.notSignIn;
+      _loginStatus = (value == 0) ? LoginStatus.signIn : LoginStatus.notSignIn;
     });
   }
 
@@ -94,6 +95,54 @@ class _LoginState extends State<Login>{
     getPref();
   }
   
+Future<void> _showSignUpDialog() async{
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  
+  return showDialog(
+    context: context, 
+    builder: (BuildContext  context){
+      return AlertDialog(
+        title: Text('Cadastrar novo usuário:'),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Nome de usuário'),
+            TextField(controller: userNameController),
+            SizedBox(height: 8),
+            Text('Email'),
+            TextField(controller: emailController),
+            SizedBox(height: 8,),
+            Text('Senha'),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              )
+
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async{
+              User u = User(username: userNameController.text, email: emailController.text, password: passwordController.text);
+              await controller.saveUser(u);
+              Navigator.pop(context);
+            },
+            child: Text('Cadastrar'),
+            
+          ),
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: Text("Cancelar"),
+          )
+        ],
+      );
+    }); 
+}
+
   @override
   Widget build(BuildContext context) {
   
@@ -124,6 +173,7 @@ class _LoginState extends State<Login>{
                           Padding(
                             padding: EdgeInsets.all(10),
                             child: TextFormField(
+                              obscureText: true,
                               onSaved: (newValue) => _password = newValue,
                               decoration: InputDecoration(
                                 labelText: "Password",
@@ -138,7 +188,8 @@ class _LoginState extends State<Login>{
                       onPressed: _submit, 
                       child: Text("Login"),
                       
-                    )
+                    ),
+                    TextButton(onPressed: () async{await _showSignUpDialog();}, child: Text('Cadastrar'))
                   
                   ],
                 ),

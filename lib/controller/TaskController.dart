@@ -27,10 +27,12 @@ class TaskController{
   Future<void> markTaskAsComplete(Task task) async{
     var db = await con.db;
     var novoValor = task.isCompleted == 1? 0 : 1;
-
+    String end = novoValor == 1? DateTime.now().toString() : '';
     
     await db.update('task', 
-    {'isCompleted': novoValor},
+    {'isCompleted': novoValor,
+      'endTime': end
+    },
     where: 'id = ?',
     whereArgs: [task.id]
     );

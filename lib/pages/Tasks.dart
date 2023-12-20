@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:planner_tarefas/controller/TaskController.dart';
 import 'package:planner_tarefas/model/Task.dart';
-
+import 'package:intl/intl.dart' ;
+import 'package:shared_preferences/shared_preferences.dart'; 
 
 class Tasks extends StatefulWidget {
   
@@ -24,20 +25,10 @@ class _Tasks extends State<Tasks>{
   }
 
 
-void _addNewTask(String title, String note) async{
+void _addNewTask(Task task) async{
     // Adicione a lógica para criar a nova tarefa
-    Task newTask = Task(
-      user_id: usuarioId,
-      board_id: taskBoardId,
-      title: title,
-      note: note,
-      date: DateTime.now().toLocal().toString(),
-      startTime: '',
-      endTime: '',
-      isCompleted: 0,
-    );
-
-    await taskController.addTask(newTask);
+    
+    await taskController.addTask(task);
     setState(() {
       
     }); 
@@ -46,6 +37,7 @@ void _addNewTask(String title, String note) async{
 void _showAddTaskDialog(BuildContext context) {
     TextEditingController titleController = TextEditingController();
     TextEditingController noteController = TextEditingController();
+    TextEditingController dateTimeStartController = TextEditingController();
 
     showDialog(
       context: context,
@@ -60,12 +52,17 @@ void _showAddTaskDialog(BuildContext context) {
               SizedBox(height: 8),
               Text('Nota:'),
               TextField(controller: noteController),
+              Text('Data de início:'),
+              TextField(
+                controller: dateTimeStartController
+                )
             ],
           ),
           actions: [
             TextButton(
               onPressed: () {
-                _addNewTask(titleController.text, noteController.text);
+                Task newTask = Task(user_id: usuarioId, board_id: taskBoardId, title: titleController.text, note: noteController.text, date: DateTime.now().toString(), startTime: dateTimeStartController.text, endTime: '', isCompleted: 0);
+                _addNewTask(newTask);
                 Navigator.pop(context); // Fechar o diálogo
               },
               child: Text('Adicionar'),
@@ -153,9 +150,14 @@ void _showAddTaskDialog(BuildContext context) {
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      Text(
+                        "Início: ${tasks[index].startTime}   |    "
+                      ),
+                      Text("Término: ${tasks[index].endTime}    "),
                       Checkbox(
                         value: tasks[index].isCompleted == 1 ? true : false,
                         onChanged: (value) async{
+                          
                           await taskController.markTaskAsComplete(tasks[index]);
                           setState(() {
                             

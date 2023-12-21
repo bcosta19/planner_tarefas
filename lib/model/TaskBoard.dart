@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:planner_tarefas/controller/TaskController.dart';
 
 
 class TaskBoard {

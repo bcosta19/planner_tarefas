@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:planner_tarefas/controller/TaskController.dart';
 import 'package:planner_tarefas/model/Task.dart';
-import 'package:intl/intl.dart' ;
-import 'package:shared_preferences/shared_preferences.dart'; 
 
 class Tasks extends StatefulWidget {
   

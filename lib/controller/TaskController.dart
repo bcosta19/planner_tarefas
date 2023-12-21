@@ -18,7 +18,7 @@ class TaskController{
 
   Future<Task> getTask(int id) async{
     var db = await con.db;
-    String sql = """SELECT * FROM task WHERE id = ${id}""";
+    String sql = """SELECT * FROM task WHERE id = $id""";
     var res = await db.rawQuery(sql);
 
     return Task.fromMap(res.first);
@@ -68,7 +68,7 @@ class TaskController{
 
   Future<List<Task>> getRecentsTasks(int id) async{
     var db = await con.db;
-    String data = DateTime.now().toString();
+    
     String sql = """SELECT * FROM task where user_id = ${id} AND date(startTime) BETWEEN date('now') AND date('now', '+7 days')""";
     var res = await db.rawQuery(sql);
 

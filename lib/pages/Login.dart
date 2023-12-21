@@ -3,7 +3,6 @@ import 'package:planner_tarefas/controller/LoginController.dart';
 import '../model/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:planner_tarefas/pages/DashBoard.dart';
-import '../model/User.dart';
 
 class Login extends StatefulWidget{
 
@@ -49,7 +48,7 @@ class _LoginState extends State<Login>{
     setState(() {
       value = preferences.getInt("value")!;
       print(value);
-      _loginStatus = (value == 0) ? LoginStatus.signIn : LoginStatus.notSignIn;
+      _loginStatus = (value == 1) ? LoginStatus.signIn : LoginStatus.notSignIn;
     });
   }
 

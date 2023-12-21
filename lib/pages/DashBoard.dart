@@ -5,6 +5,7 @@ import 'package:planner_tarefas/model/TaskBoard.dart';
 import 'package:planner_tarefas/controller/TaskBoardController.dart';
 import 'package:planner_tarefas/pages/CompleteTasks.dart';
 import 'package:planner_tarefas/pages/Login.dart';
+import 'package:planner_tarefas/pages/RecentsTasks.dart';
 import 'package:planner_tarefas/pages/Tasks.dart';
 
 class DashBoard extends StatefulWidget {
@@ -53,7 +54,7 @@ class _DashBoard extends State<DashBoard>{
               } else if (value == 'Pesquisar') {
                 // Implemente a lógica de pesquisa aqui
               } else if (value == 'Tarefas Recentes') {
-                // Implemente a lógica de tarefas recentes aqui
+                Navigator.push(context, MaterialPageRoute(builder: (context) => RecentsTasks(usuarioId)));
               } else if (value == 'Tarefas Concluídas') {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => CompleteTasks(usuarioId)));
               }
@@ -87,6 +88,7 @@ class _DashBoard extends State<DashBoard>{
               itemCount: taskBoards.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  selectedColor: Color(taskBoards[index].color),
                   title: Text(taskBoards[index].name),
                   subtitle: Text('Quantidade de Tarefas:${taskBoards[index].qtdTask}'),
                   onTap: () {

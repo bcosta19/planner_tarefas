@@ -44,6 +44,8 @@ class TaskController{
     List<Task> list = res.isNotEmpty ? res.map((c) => Task.fromMap(c)).toList() : [];
     return list;
   }
+
+
   Future<void> updateTask(Task task, String newTitle, String newNote) async{
     var db = await con.db;
     await db.update(
@@ -63,6 +65,17 @@ class TaskController{
     
     return list;
   }
+
+  Future<List<Task>> getRecentsTasks(int id) async{
+    var db = await con.db;
+    String data = DateTime.now().toString();
+    String sql = """SELECT * FROM task where user_id = ${id} AND date(startTime) BETWEEN date('now') AND date('now', '+7 days')""";
+    var res = await db.rawQuery(sql);
+
+    List<Task> list = res.isNotEmpty? res.map((c) {print(c); return Task.fromMap(c);}).toList() : [];
+    print(list);
+    return list;
+  } 
 
   Future<List<Task>> getAllTaskOfTaskBoards(int user_id, int board_id) async{
     var db = await con.db;

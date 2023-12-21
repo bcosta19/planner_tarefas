@@ -22,7 +22,7 @@ void main(){
       '/dashboard': (context) => DashBoard(0),
       '/task': (context) => Tasks(0, 0),
       '/search': (context) => const Search(),
-      '/recentsTasks': (context) => const RecentsTasks(),
+      '/recentsTasks': (context) => RecentsTasks(0),
       '/completeTasks': (context) => CompleteTasks(0),
     }
 
